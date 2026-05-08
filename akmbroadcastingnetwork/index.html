@@ -1,56 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>AKM Broadcasting Network Overlay</title>
-  <link rel="stylesheet" href="overlay.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AKM Broadcasting Overlay</title>
+<link rel="stylesheet" href="overlay.css">
 </head>
+
 <body>
-  <!-- Coming Soon Overlay -->
-  <div id="comingSoon">
-    <img src="assets/akm-logo.png" alt="AKM Logo" class="logo">
-    <div class="coming-text">Coming Soon...</div>
-    <audio id="introAudio" src="assets/Orchestral Swell 01_256k.mp3"></audio>
-  </div>
 
-  <!-- Camera Scene -->
-  <div id="scene7">
-    <iframe src="https://vdo.ninja/?view=BpGxUDy"
-            width="640" height="360"
-            frameborder="0"
-            allow="camera; microphone"
-            allowfullscreen>
-    </iframe>
-  </div>
+<div id="overlay">
+    <img id="logo" src="https://i.imgur.com/8QfQJ5B.png" alt="Logo">
+    <h1 id="title">AKM Broadcasting Network</h1>
+</div>
 
-  <script>
-    function showComingSoon() {
-      const overlay = document.getElementById('comingSoon');
-      const audio = document.getElementById('introAudio');
-      overlay.style.display = 'flex';
-      overlay.style.animation = 'fadeIn 2s forwards';
-      audio.volume = 0;
-      audio.play();
-      let fadeIn = setInterval(() => {
-        if (audio.volume < 1) audio.volume += 0.05;
-        else clearInterval(fadeIn);
-      }, 200);
-      setTimeout(() => hideComingSoon(), 8000); // auto-hide after 8s
-    }
+<audio id="introAudio" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7b6e4c7f8e.mp3?filename=cinematic-intro-110397.mp3"></audio>
 
-    function hideComingSoon() {
-      const overlay = document.getElementById('comingSoon');
-      const audio = document.getElementById('introAudio');
-      overlay.style.animation = 'fadeOut 2s forwards';
-      setTimeout(() => overlay.style.display = 'none', 2000);
-      let fadeOut = setInterval(() => {
-        if (audio.volume > 0) audio.volume -= 0.05;
-        else { clearInterval(fadeOut); audio.pause(); }
-      }, 200);
-    }
+<script>
+function playIntro() {
+    document.getElementById("overlay").style.opacity = "1";
+    document.getElementById("introAudio").play();
+}
 
-    // Trigger overlay on load
-    window.onload = showComingSoon;
-  </script>
+window.onload = () => {
+    playIntro();
+};
+</script>
+
 </body>
 </html>
