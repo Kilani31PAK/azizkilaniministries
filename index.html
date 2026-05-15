@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Live Output</title>
+../shared/styles.css
+</head>
+<body>
+
+<!-- LOWER THIRD -->
+<div id="lowerThird" class="lower-third hidden">
+  <span id="ltText"></span>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div id="tickerText"></div>
+</div>
+
+../shared/socket.jsscript>
+<script>
+const channel = new BroadcastChannel("broadcast");
+
+channel.onmessage = (e) => {
+  const data = e.data;
+
+  if (data.type === "lowerthird") {
+    ltText.innerText = data.text;
+    lowerThird.classList.remove("hidden");
+  }
+
+  if (data.type === "hideLowerThird") {
+    lowerThird.classList.add("hidden");
+  }
+
+  if (data.type === "ticker") {
+    tickerText.innerText = data.text;
+  }
+};
+</script>
+
+</body>
+</html>
